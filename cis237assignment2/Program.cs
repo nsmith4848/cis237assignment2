@@ -78,6 +78,16 @@ namespace cis237assignment2
         static char[,] transposeMaze(char[,] mazeToTranspose)
         {
             //Write code her to create a transposed maze.
+            char temp;
+            int xCoordinate = 0;
+            int yCoordinate = 0;
+            while(yCoordinate != mazeToTranspose.Length)
+            {
+                while(xCoordinate != mazeToTranspose.Length)
+                {
+
+                }
+            }
             return new char[1, 1];
         }
     }

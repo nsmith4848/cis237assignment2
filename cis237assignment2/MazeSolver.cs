@@ -25,7 +25,7 @@ namespace cis237assignment2
         /// Default Constuctor to setup a new maze solver.
         /// </summary>
         public MazeSolver()
-        {}
+        { }
 
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace cis237assignment2
             this.maze = maze;
             this.xStart = xStart;
             this.yStart = yStart;
-
+            mazeTraversal(maze, xStart, yStart);
             //Do work needed to use mazeTraversal recursive call and solve the maze.
         }
 
@@ -54,9 +54,133 @@ namespace cis237assignment2
         /// Feel free to change the return type if you like, or pass in parameters that you might need.
         /// This is only a very small starting point.
         /// </summary>
-        private void mazeTraversal()
+        private void mazeTraversal(char[,] maze, int xCoordinate, int yCoordinate)
         {
             //Implement maze traversal recursive call
+            if (xCoordinate == maze.Length)
+            {
+                return;
+            }
+            else if (maze[xCoordinate + 1, yCoordinate] == Convert.ToChar("."))
+            {
+                maze[xCoordinate, yCoordinate] = Convert.ToChar("!");
+                xCoordinate++;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate + 1, yCoordinate + 1] == Convert.ToChar("."))
+            {
+                maze[xCoordinate, yCoordinate] = Convert.ToChar("!");
+                xCoordinate++;
+                yCoordinate++;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate, yCoordinate + 1] == Convert.ToChar("."))
+            {
+                maze[xCoordinate, yCoordinate] = Convert.ToChar("!");
+                yCoordinate++;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate - 1, yCoordinate + 1] == Convert.ToChar("."))
+            {
+                maze[xCoordinate, yCoordinate] = Convert.ToChar("!");
+                xCoordinate--;
+                yCoordinate++;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate - 1, yCoordinate] == Convert.ToChar("."))
+            {
+                maze[xCoordinate, yCoordinate] = Convert.ToChar("!");
+                xCoordinate--;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate - 1, yCoordinate - 1] == Convert.ToChar("."))
+            {
+                maze[xCoordinate, yCoordinate] = Convert.ToChar("!");
+                xCoordinate--;
+                yCoordinate--;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate, yCoordinate - 1] == Convert.ToChar("."))
+            {
+                maze[xCoordinate, yCoordinate] = Convert.ToChar("!");
+                yCoordinate--;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate + 1, yCoordinate - 1] == Convert.ToChar("."))
+            {
+                maze[xCoordinate, yCoordinate] = Convert.ToChar("!");
+                xCoordinate++;
+                yCoordinate--;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else
+            {
+                Backtrack(maze, xCoordinate, yCoordinate);
+            }
+        }
+
+        private void Backtrack(char[,] maze, int xCoordinate, int yCoordinate)
+        {
+            if (maze[xCoordinate + 1, yCoordinate] == Convert.ToChar("!"))
+            {
+                xCoordinate++;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate + 1, yCoordinate + 1] == Convert.ToChar("!"))
+            {
+                xCoordinate++;
+                yCoordinate++;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate, yCoordinate + 1] == Convert.ToChar("!"))
+            {
+                yCoordinate++;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate - 1, yCoordinate + 1] == Convert.ToChar("!"))
+            {
+                xCoordinate--;
+                yCoordinate++;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate - 1, yCoordinate] == Convert.ToChar("!"))
+            {
+                xCoordinate--;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate - 1, yCoordinate - 1] == Convert.ToChar("!"))
+            {
+                xCoordinate--;
+                yCoordinate--;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate, yCoordinate - 1] == Convert.ToChar("!"))
+            {
+                yCoordinate--;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
+            else if (maze[xCoordinate + 1, yCoordinate - 1] == Convert.ToChar("!"))
+            {
+                xCoordinate++;
+                yCoordinate--;
+                Console.WriteLine("Move to coordinate {0},{1}.", xCoordinate, yCoordinate);
+                mazeTraversal(maze, xCoordinate, yCoordinate);
+            }
         }
     }
 }
