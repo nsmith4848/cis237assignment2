@@ -10,8 +10,6 @@ namespace cis237assignment2
     {
         /// <summary>
         /// This is the main entry point for the program.
-        /// You are free to add anything else you would like to this program,
-        /// however the maze solving part needs to occur in the MazeSolver class.
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
@@ -23,9 +21,7 @@ namespace cis237assignment2
             const int Y_START = 1;
 
             ///<summary>
-            /// The first maze that needs to be solved.
-            /// Note: You may want to make a smaller version to test and debug with.
-            /// You don't have to, but it might make your life easier.
+            /// The first maze that needs to be solved
             /// </summary>
             char[,] maze1 = 
             { { '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
@@ -56,7 +52,6 @@ namespace cis237assignment2
 
             //Solve the transposed maze.
             mazeSolver.SolveMaze(maze2, X_START, Y_START);
-
         }
 
         /// <summary>
@@ -70,14 +65,13 @@ namespace cis237assignment2
         ///                             1, 4, 7
         ///                             2, 5, 8
         ///                             3, 6, 9
-        /// The current return statement is just a placeholder so the program
-        /// doesn't complain about no return value.
         /// </summary>
         /// <param name="mazeToTranspose"></param>
         /// <returns>transposedMaze</returns>
         static char[,] transposeMaze(char[,] mazeToTranspose)
         {
-            //Write code her to create a transposed maze.
+            //Two while loops are set up in order to only transpose the data once.  This is done by avoiding 
+            //All data on the other side of the elements that stay the same when transposed(where x is the same as y)
             char temp;
             int xCoordinate = 0;
             int yCoordinate = 0;
@@ -85,7 +79,9 @@ namespace cis237assignment2
             {
                 while(xCoordinate != mazeToTranspose.Length)
                 {
+                    temp = mazeToTranspose[xCoordinate, yCoordinate];
                     mazeToTranspose[xCoordinate, yCoordinate] = mazeToTranspose[yCoordinate, xCoordinate];
+                    mazeToTranspose[yCoordinate, xCoordinate] = temp;
                     xCoordinate++;
                 }
                 yCoordinate++;
