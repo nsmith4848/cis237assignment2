@@ -85,10 +85,13 @@ namespace cis237assignment2
             {
                 while(xCoordinate != mazeToTranspose.Length)
                 {
-
+                    mazeToTranspose[xCoordinate, yCoordinate] = mazeToTranspose[yCoordinate, xCoordinate];
+                    xCoordinate++;
                 }
+                yCoordinate++;
+                xCoordinate = yCoordinate;
             }
-            return new char[1, 1];
+            return mazeToTranspose;
         }
     }
 }
